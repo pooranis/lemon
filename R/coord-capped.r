@@ -134,9 +134,9 @@ capped_horizontal <- function(capped = c('both','left','right','none'),
     if (agrob$name == 'NULL') return(agrob)
 
     r <- range(as.numeric( switch(axis,
-                                  primary=scale_details$x.major,
-                                  secondary=scale_details$x.sec.major, scale_details$x.major
-    )))
+                                  primary=scale_details$x$break_positions(),
+                                  secondary=scale_details$x.sec$break_positions(), scale_details$x$break_positions()
+    )), na.rm=TRUE)
     i <- which(grepl('line', names(agrob$children)))
     agrob$children[[i]]$x <- switch(capped,
                                     none =  unit(c(min(0 + gap, r[1]), max(1 - gap, r[2])), 'native'),
@@ -172,9 +172,9 @@ capped_vertical <- function(capped = c('top','bottom','both','none'),
     if (agrob$name == 'NULL') return(agrob)
 
     r <- range(as.numeric( switch(axis,
-      primary=scale_details$y.major,
-      secondary=scale_details$y.sec.major, scale_details$y.major
-    )))
+                                  primary=scale_details$y$break_positions(),
+                                  secondary=scale_details$y.sec$break_positions(), scale_details$y$break_positions()
+    )), na.rm=TRUE)
     i <- which(grepl('line', names(agrob$children)))
     agrob$children[[i]]$y <- switch(capped,
       none =    unit(c(min(0 + gap,r[1]), max(1 - gap, r[2])), 'native'),
