@@ -59,8 +59,11 @@ brackets_horizontal <- function(direction = c('up','down'),
   direction=match.arg(direction)
 
   # Returns a function
-  fn <- function(scale_details, axis, scale, position, theme) {
-    agrob <- render_axis(scale_details, axis, "x", position, theme)
+  
+  #fn <- function(scale_details, axis, scale, position, theme) {
+  fn <- function(guides, position, theme) {
+    agrob <-  panel_guides_grob(guides, position, theme)
+    
     if (agrob$name == 'NULL') return(agrob)
 
     ind <- names(agrob$children) == 'axis'
@@ -140,8 +143,8 @@ brackets_vertical <- function(direction = c('left','right'),
     tick.length <- unit(as.numeric(tick.length), 'npc')
   
   direction=match.arg(direction)
-  fn <- function(scale_details, axis, scale, position, theme) {
-    agrob <- render_axis(scale_details, axis, "y", position, theme)
+  fn <- function(guides, position, theme) {
+    agrob <-  panel_guides_grob(guides, position, theme)
     if (agrob$name == 'NULL') return(agrob)
 
     ind <- names(agrob$children) == 'axis'

@@ -43,20 +43,6 @@ is.waive <- function(x) inherits(x, "waiver")
   if (!is.null(a)) a else b
 }
 
-# From ggplot2/R/coord-.r
-# Renders an axis with the correct orientation or zeroGrob if no axis should be
-# generated
-render_axis <- function(panel_params, axis, scale, position, theme) {
-  if (axis == "primary") {
-    draw_axis(panel_params[[scale]]$break_positions(), panel_params[[scale]]$get_labels(), position, theme)
-  } else if (axis == "secondary" && !is.null(panel_params[[paste0(scale, ".sec")]]$break_positions())) {
-    draw_axis(panel_params[[paste0(scale, ".sec")]]$break_positions(), panel_params[[paste0(scale, ".sec")]]$get_labels(), position, theme)
-  } else {
-    zeroGrob()
-  }
-}
-
-
 #' @import grid
 ggname <- function (prefix, grob) {
   grob$name <- grid::grobName(grob, prefix)
