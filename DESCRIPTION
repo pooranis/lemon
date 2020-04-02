@@ -37,6 +37,7 @@ LazyData: true
 RoxygenNote: 7.1.0
 Collate: 
     'ggplot2.r'
+    'coord-cartesian.r'
     'lemon-plot.r'
     'axis-annotation.r'
     'brackets.R'

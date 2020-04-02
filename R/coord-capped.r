@@ -124,19 +124,22 @@ coord_capped_flip <- function(xlim = NULL,
 capped_horizontal <- function(capped = c('both','left','right','none'),
                               gap = 0.01) {
   capped <- match.arg(capped)
-  # scale_details: aka. panel_params
-  # axis: primary or secondary
-  # scale: "x" or "y"
+  # guides: list with names (x, y, x.sec, y.sec), each a list describing an axis as a "guide"
   # position: top or bottom / left or right
   # theme:
-  fn <- function(scale_details, axis, scale, position, theme) {
-    agrob <- render_axis(scale_details, axis, "x", position, theme)
-    if (agrob$name == 'NULL') return(agrob)
+  #fn <- function(scale_details, axis, scale, position, theme) {
+  fn <- function(guides, position, theme) {
+    agrob <-  panel_guides_grob(guides, position, theme)
 
-    r <- range(as.numeric( switch(axis,
-                                  primary=scale_details$x$break_positions(),
-                                  secondary=scale_details$x.sec$break_positions(), scale_details$x$break_positions()
-    )), na.rm=TRUE)
+    if (agrob$name == 'NULL') return(agrob)
+    
+    if (guides$x$position == position) {
+      breaks <- guides$x$key$x
+    } else {
+      breaks <- guides$x.sec$key$x
+    }
+    r <- range(breaks, na.rm=TRUE)
+    
     i <- which(grepl('line', names(agrob$children)))
     agrob$children[[i]]$x <- switch(capped,
                                     none =  unit(c(min(0 + gap, r[1]), max(1 - gap, r[2])), 'native'),
@@ -162,19 +165,21 @@ capped_horisontal <- capped_horizontal
 capped_vertical <- function(capped = c('top','bottom','both','none'),
                             gap = 0.01) {
   capped <- match.arg(capped)
-  # scale_details: aka. panel_params
-  # axis: primary or secondary
-  # scale: "x" or "y"
+  # guides: list with names (x, y, x.sec, y.sec), each a list describing an axis as a "guide"
   # position: top or bottom / left or right
   # theme:
-  fn <- function(scale_details, axis, scale, position, theme) {
-    agrob <- render_axis(scale_details, axis, "y", position, theme)
-    if (agrob$name == 'NULL') return(agrob)
+  #fn <- function(scale_details, axis, scale, position, theme) {
+  fn <- function(guides, position, theme) {
+    agrob <-  panel_guides_grob(guides, position, theme)
 
-    r <- range(as.numeric( switch(axis,
-                                  primary=scale_details$y$break_positions(),
-                                  secondary=scale_details$y.sec$break_positions(), scale_details$y$break_positions()
-    )), na.rm=TRUE)
+    if (agrob$name == 'NULL') return(agrob)
+    
+    if (guides$y$position == position) {
+      breaks <- guides$y$key$y
+    } else {
+      breaks <- guides$y.sec$key$y
+    }
+    r <- range(breaks, na.rm=TRUE)
     i <- which(grepl('line', names(agrob$children)))
     agrob$children[[i]]$y <- switch(capped,
       none =    unit(c(min(0 + gap,r[1]), max(1 - gap, r[2])), 'native'),
