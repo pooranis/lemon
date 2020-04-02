@@ -213,6 +213,8 @@ GeomPointPath <- ggplot2::ggproto('GeomPointPath',
       deltay = y1 - y;
       length <- sqrt(deltax**2 + deltay**2);
     })
+    munched <- munched[-nrow(munched),]
+    
     
     if (any(munched$length > threshold, na.rm=TRUE)) {
       # Calculate angle between each pair of points and move endpoints:
