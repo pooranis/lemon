@@ -65,8 +65,8 @@ brackets_horizontal <- function(direction = c('up','down'),
 
     ind <- names(agrob$children) == 'axis'
     ind.notline <-  which(ind)
-    ind.ticks <- which(grepl('ticks', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
-    ind.text <- which(grepl('text', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.ticks <- which(grepl('polyline', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.text <- which(grepl('titleGrob', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
     ticksgrob <- agrob$children[[ind.notline]]$grobs[[ind.ticks]]
     
     # If theme(axis.ticks[.x/.y] = element_blank()), then ticksgrob is a
@@ -146,8 +146,8 @@ brackets_vertical <- function(direction = c('left','right'),
 
     ind <- names(agrob$children) == 'axis'
     ind.notline <-  which(ind)
-    ind.ticks <- which(grepl('ticks', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
-    ind.text <- which(grepl('text', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.ticks <- which(grepl('polyline', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.text <- which(grepl('titleGrob', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
     ticksgrob <- agrob$children[[ind.notline]]$grobs[[ind.ticks]]
 
     
