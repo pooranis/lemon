@@ -41,6 +41,7 @@ The \code{.dot} functions creates functions that allows relative-like
 specification of paths, but are safe from changing working directory.
 }
 \examples{
+\dontrun{
 
 .data <- .dot('data')
 .data('input.txt')
@@ -49,4 +50,5 @@ specification of paths, but are safe from changing working directory.
 .dot2(c('rawdata','results'))
 .rawdata('rawfile.csv')
 .results('myresults.txt')
+}
 }

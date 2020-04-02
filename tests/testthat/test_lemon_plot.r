@@ -9,7 +9,7 @@ test_that('ggplot2 does not break lemon_plot by altering class', {
   
   l <- as.lemon_plot(p)
   expect_lemon_plot(l)
-  expect_error(l + 1, regexp = "Don't know how to add 1 to a plot", fixed=TRUE)
+  expect_error(l + 1, regexp = "Can't add `1` to a ggplot object.", fixed=TRUE)
   expect_lemon_plot(l + NULL)
   expect_lemon_plot(l %+% data.frame(a=3, b=0, c='a'))
   expect_lemon_plot(l + theme_bw())

@@ -99,3 +99,16 @@ plot_theme <- function (x, default = theme_get()) {
   }
 }
 is_theme_complete <- function(x) isTRUE(attr(x, "complete"))
+
+# From ggplot2/R/scale-.r
+# In place modification of a scale to change the primary axis
+scale_flip_position <- function(scale) {
+  scale$position <- switch(scale$position,
+    top = "bottom",
+    bottom = "top",
+    left = "right",
+    right = "left",
+    scale$position
+  )
+  invisible()
+}
