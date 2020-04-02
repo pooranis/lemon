@@ -1,6 +1,10 @@
 #' ggplot2/R/cord-cartesian.r
 #' Commit fa000f7 on Sep 29, 2019
 
+#' @include  scale-expansion.r
+#' @include scale-view.r
+
+
 #' Cartesian coordinates
 #'
 #' The Cartesian coordinate system is the most familiar, and common, type of
@@ -24,7 +28,7 @@
 #'   limits are set via `xlim` and `ylim` and some data points fall outside those
 #'   limits, then those data points may show up in places such as the axes, the
 #'   legend, the plot title, or the plot margins.
-#' @export
+#' @noRd
 #' @examples
 #' # There are two ways of zooming the plot display: with scales or
 #' # with coordinate systems.  They work in two rather different ways.
@@ -72,7 +76,7 @@ coord_cartesian <- function(xlim = NULL, ylim = NULL, expand = TRUE,
   )
 }
 
-#' @rdname ggplot2-ggproto
+#' @rdname lemon-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -116,8 +120,8 @@ CoordCartesian <- ggproto("CoordCartesian", Coord,
         aesthetic,
         panel_params[[aesthetic]],
         guides,
-        default = guide_axis(),
-        null = guide_none()
+        default = ggplot2::guide_axis(),
+        null = ggplot2::guide_none()
       )
     })
 

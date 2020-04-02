@@ -69,7 +69,23 @@ annotate_y_axis <- function(label, y,
 }
 #' @rdname annotate_axis
 #' @export
-#' @inheritParams annotate_y_axis
+# @inheritParams annotate_y_axis
+#' @param label Text to print
+#' @param y,x Position of the annotation.
+#' @param side left or right, or top or bottom side to print annotation
+#' @param parsed Logical (default \code{FALSE}), 
+#'   when \code{TRUE}, uses mathplot for outputting expressions. 
+#'   See section "Showing values".
+#' @param print_label,print_value,print_both
+#'   Logical; what to show on annotation. Label and/or value.
+#'   \code{print_both} is shortcut for setting both \code{print_label} and
+#'   \code{print_value}. When both is TRUE, uses argument \code{sep} to 
+#'   separate the label and value.
+#' @param ... Style settings for label and tick: 
+#'   colour, hjust, vjust, size, fontface, family, rot. 
+#'   When \code{waiver()} (default),
+#'   the relevant theme element is used.
+
 annotate_x_axis <- function(label, x, 
                              side = waiver(), 
                              print_label = TRUE,
@@ -290,7 +306,7 @@ AAList <- ggplot2::ggproto("AAList", NULL,
       
       axisgrob <- old_guide_axis(scales::rescale(params$values, from=range), labels, side, theme)
     } else {
-      axisgrob <- old_guide_axis(NA, NA, side, theme, element_blank(), data.frame(tickcolour=NA))
+      axisgrob <- old_guide_axis(NA, NA, side, theme)
     }
     
     gt_index <- which(axisgrob$childrenOrder == 'axis')

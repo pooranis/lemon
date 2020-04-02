@@ -97,8 +97,14 @@ coord_flex_cart <- function(xlim = NULL,
 
 #' @rdname coord_flex
 #' @export
-#' @inheritParams  coord_flex_cart
-#'
+# @inheritParams  coord_flex_cart
+#' @param top,left,bottom,right Function for drawing axis lines, ticks, and labels,
+#'    use e.g. \code{\link{capped_horizontal}} or \code{\link{brackets_horizontal}}.
+#  @inheritParams coord_cartesian
+#' @param xlim,ylim Limits for the x and y axes.
+#' @param expand If \code{TRUE}, the default, adds a small expansion factor to
+#'   the limits to ensure that data and axes don't overlap. If \code{FALSE},
+#'   limits are taken exactly from the data or \code{xlim}/\code{ylim}.
 coord_flex_flip <- function(xlim = NULL,
                             ylim = NULL,
                             expand = TRUE,
@@ -120,9 +126,16 @@ coord_flex_flip <- function(xlim = NULL,
 }
 
 #' @rdname coord_flex
-#' @inheritParams  coord_flex_cart
 #' @export
 #' @param ratio aspect ratio, expressed as \code{y / x}.
+# @inheritParams  coord_flex_cart
+#' @param top,left,bottom,right Function for drawing axis lines, ticks, and labels,
+#'    use e.g. \code{\link{capped_horizontal}} or \code{\link{brackets_horizontal}}.
+#  @inheritParams coord_cartesian
+#' @param xlim,ylim Limits for the x and y axes.
+#' @param expand If \code{TRUE}, the default, adds a small expansion factor to
+#'   the limits to ensure that data and axes don't overlap. If \code{FALSE},
+#'   limits are taken exactly from the data or \code{xlim}/\code{ylim}.
 coord_flex_fixed <- function(ratio = 1,
                              xlim = NULL,
                              ylim = NULL,

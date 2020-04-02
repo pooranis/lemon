@@ -58,14 +58,18 @@ get_panel_y_range <- function(layout, index=1) {
 }
 
 #' @rdname get_panel_range
-#' @inheritParams get_panel_y_range
+# @inheritParams get_panel_y_range
+#' @param layout \code{layout} part from ggplot_build
+#' @param index Could be panel number?
 #' @export
 get_panel_x_range <- function(layout, index=1) {
   layout$panel_params[[index]]$x.range %||% layout$panel_ranges[[index]]$x.range
 }
 
 #' @rdname get_panel_range
-#' @inheritParams get_panel_y_range
+# @inheritParams get_panel_y_range
+#' @param layout \code{layout} part from ggplot_build
+#' @param index Could be panel number?
 #' @export
 get_panel_params <- function(layout, index=1) {
   layout$panel_params[[index]] %||% layout$panel_ranges[[index]]

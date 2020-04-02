@@ -4,10 +4,22 @@
 \alias{geom_siderange}
 \title{Display range of data in side of plot}
 \usage{
-geom_siderange(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", ..., distance = 3, arrow = NULL,
-  lineend = "butt", sides = "bl", start = NA, end = NA,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+geom_siderange(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  distance = 3,
+  arrow = NULL,
+  lineend = "butt",
+  sides = "bl",
+  start = NA,
+  end = NA,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2]{aes}}

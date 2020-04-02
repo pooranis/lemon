@@ -126,12 +126,18 @@ brackets_horizontal <- function(direction = c('up','down'),
 ## Turns out, there is no British spelling horizontal with an s...
 #' @export
 #' @keywords internal
-#' @inheritParams brackets_horizontal
+# @inheritParams brackets_horizontal
 brackets_horisontal <- brackets_horizontal
+
 
 #' @export
 #' @rdname brackets
-#' @inheritParams brackets_horizontal
+# @inheritParams brackets_horizontal
+#' @param direction Which way should the opening side of the brackets point?
+#'   up, down, left, or right?
+#' @param length Length of the unit, parallel with axis line.
+#' @param tick.length Height (width) of x-axis (y-axis) bracket.
+#'   If \code{waiver()} (default), use \code{axis.ticks.length} from \code{\link{theme}}.
 brackets_vertical <- function(direction = c('left','right'),
                               length = unit(0.05, 'npc'),
                               tick.length = waiver()) {

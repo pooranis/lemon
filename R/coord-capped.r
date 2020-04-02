@@ -87,7 +87,18 @@ coord_capped_cart <- function(xlim = NULL,
 
 #' @rdname coord_capped
 #' @export
-#' @inheritParams coord_flex_cart
+# @inheritParams coord_flex_cart
+#' @param top,left,bottom,right Either a function returned from
+#'   \code{\link{capped_horizontal}} or \code{\link{brackets_horizontal}}.
+#'   If string, it is assumed to be shorthand for
+#'   \code{capped_horizontal(capped)} or similar for vertical.
+#' @param gap Both ends are \emph{always} capped by this proportion.
+#'   Usually a value between 0 and 1.
+#  @inheritParams coord_cartesian
+#' @param xlim,ylim Limits for the x and y axes.
+#' @param expand If \code{TRUE}, the default, adds a small expansion factor to
+#'   the limits to ensure that data and axes don't overlap. If \code{FALSE},
+#'   limits are taken exactly from the data or \code{xlim}/\code{ylim}.
 coord_capped_flip <- function(xlim = NULL,
                               ylim = NULL,
                               expand = TRUE,
@@ -117,10 +128,21 @@ coord_capped_flip <- function(xlim = NULL,
 
 #' @param capped Which end to cap the line. Can be one of (where relevant):
 #'   \code{both}, \code{none}, \code{left}, \code{right}, \code{top}, \code{bottom}.
-#' @inheritParams coord_capped_cart
 #' @rdname coord_capped
 #' @export
 #' @import grid
+# @inheritParams coord_capped_cart
+#' @param top,left,bottom,right Either a function returned from
+#'   \code{\link{capped_horizontal}} or \code{\link{brackets_horizontal}}.
+#'   If string, it is assumed to be shorthand for
+#'   \code{capped_horizontal(capped)} or similar for vertical.
+#' @param gap Both ends are \emph{always} capped by this proportion.
+#'   Usually a value between 0 and 1.
+#  @inheritParams coord_cartesian
+#' @param xlim,ylim Limits for the x and y axes.
+#' @param expand If \code{TRUE}, the default, adds a small expansion factor to
+#'   the limits to ensure that data and axes don't overlap. If \code{FALSE},
+#'   limits are taken exactly from the data or \code{xlim}/\code{ylim}.
 capped_horizontal <- function(capped = c('both','left','right','none'),
                               gap = 0.01) {
   capped <- match.arg(capped)
@@ -153,12 +175,23 @@ capped_horizontal <- function(capped = c('both','left','right','none'),
   fn
 }
 
-#' @inheritParams capped_horizontal
+# @inheritParams capped_horizontal
 #' @keywords internal
 #' @export
 capped_horisontal <- capped_horizontal
 
-#' @inheritParams capped_horizontal
+# @inheritParams capped_horizontal
+#' @param top,left,bottom,right Either a function returned from
+#'   \code{\link{capped_horizontal}} or \code{\link{brackets_horizontal}}.
+#'   If string, it is assumed to be shorthand for
+#'   \code{capped_horizontal(capped)} or similar for vertical.
+#' @param gap Both ends are \emph{always} capped by this proportion.
+#'   Usually a value between 0 and 1.
+#  @inheritParams coord_cartesian
+#' @param xlim,ylim Limits for the x and y axes.
+#' @param expand If \code{TRUE}, the default, adds a small expansion factor to
+#'   the limits to ensure that data and axes don't overlap. If \code{FALSE},
+#'   limits are taken exactly from the data or \code{xlim}/\code{ylim}.
 #' @rdname coord_capped
 #' @export
 #' @import grid

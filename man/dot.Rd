@@ -5,8 +5,7 @@
 \alias{.dot2}
 \title{Create paths that are safe from changing working directory.}
 \usage{
-.dot(x, root = getwd(), mustExist = FALSE, relative = FALSE,
-  create = TRUE)
+.dot(x, root = getwd(), mustExist = FALSE, relative = FALSE, create = TRUE)
 
 .dot2(names, quiet = FALSE, ...)
 }

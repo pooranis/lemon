@@ -37,10 +37,12 @@ LazyData: true
 RoxygenNote: 7.1.0
 Collate: 
     'ggplot2.r'
-    'coord-cartesian.r'
     'lemon-plot.r'
     'axis-annotation.r'
     'brackets.R'
+    'scale-view.r'
+    'scale-expansion.r'
+    'coord-cartesian.r'
     'coord-flex.r'
     'coord-capped.r'
     'dot.r'
@@ -51,7 +53,6 @@ Collate:
     'geom-siderange.r'
     'grob_utils.r'
     'gtable_show-.r'
-    'guides-axis.r'
     'legends.r'
     'lemon.r'
     'scale-symmetric.r'

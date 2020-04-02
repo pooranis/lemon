@@ -2,7 +2,14 @@
 NULL
 
 #' @rdname facet_rep
-#' @inheritParams facet_rep_grid
+# @inheritParams facet_rep_grid
+#' @param ... Arguments used for \code{\link[ggplot2]{facet_grid}} or
+#'            \code{\link[ggplot2]{facet_wrap}}.
+#' @param repeat.tick.labels When \code{FALSE} (default), axes on inner panels
+#'                           have their tick labels (i.e. the numbers) removed.
+#'                           Set this to \code{TRUE} to keep all labels,
+#'                           or any combination of top, bottom, left, right to
+#'                           keep only those specified. Also acceps 'x' and 'y'.
 #' @param scales As for \code{facet_grid}, but alters behaviour of \code{repeat.tick.labels}.
 #' @import ggplot2
 #' @export

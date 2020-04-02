@@ -52,7 +52,9 @@ scale_x_symmetric <- function(mid=0, ...) {
 
 #' @rdname scale_symmetric
 #' @export
-#' @inheritParams scale_x_symmetric
+# @inheritParams scale_x_symmetric
+#' @param mid Value to center the scale around.
+#' @param ... Values passed on to \code{\link[ggplot2]{scale_continuous}}.
 scale_y_symmetric <- function(mid=0, ...) {
   set_symmetric_scale(ggplot2::scale_y_continuous(...), mid=mid)
 }
