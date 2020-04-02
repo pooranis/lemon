@@ -291,7 +291,10 @@ arrangeGrob <- gridExtra::arrangeGrob
 #' @param offset Numeric vector, sets distance from edge of panel.
 #'               First element for horisontal distance, second for vertical.
 #'               Not used by arguments \code{x} and \code{y}.
-#' @param name,clip,z Parameters forwarded to 
+#' @param z Z-level of legend. When \code{Inf} (default), legend is placed just
+#'            \emph{under} the axis-lines. If you want it on top of everything, use a 
+#'            sufficient large number, but not \code{Inf}.
+#' @param name,clip Parameters forwarded to 
 #'             \code{\link[gtable]{gtable_add_grob}}.
 #' @param plot Logical, when \code{TRUE} (default), draws plot with legend
 #'             repositioned on a new page.
