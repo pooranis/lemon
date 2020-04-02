@@ -51,7 +51,7 @@ NULL
 #'   (\emph{this} is where the function excels over \code{geom_point() + geom_line()}).
 #' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}.
 #' @param lineend Line end style (round, butt, square).
-#' @param linejoin Line join style (round, mintre, bevel).
+#' @param linejoin Line join style (round, mitre, bevel).
 #' @param linemitre Line mitre limit (number greater than 1).
 #' @param arrow Arrow specification, as created by \code{\link[grid]{arrow}}.
 #' @param na.rm If \code{FALSE} (default), missing values are removed with a warning.
