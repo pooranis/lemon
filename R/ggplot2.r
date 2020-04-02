@@ -49,7 +49,7 @@ is.waive <- function(x) inherits(x, "waiver")
 render_axis <- function(panel_params, axis, scale, position, theme) {
   if (axis == "primary") {
     draw_axis(panel_params[[scale]]$break_positions(), panel_params[[scale]]$get_labels(), position, theme)
-  } else if (axis == "secondary" && !is.null(panel_params[[paste0(scale, ".sec.major")]])) {
+  } else if (axis == "secondary" && !is.null(panel_params[[paste0(scale, ".sec")]]$break_positions())) {
     draw_axis(panel_params[[paste0(scale, ".sec")]]$break_positions(), panel_params[[paste0(scale, ".sec")]]$get_labels(), position, theme)
   } else {
     zeroGrob()
