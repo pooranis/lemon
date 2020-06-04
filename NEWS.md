@@ -6,6 +6,10 @@
 
 * **TODO:** Extend `lemon_print` to work on cross-tabulation tables.
 
+# lemon 0.4.5
+
+* Bugfix to `reposition_legend` cf. proper panel naming in ggplot2 3.3.1.
+
 # lemon 0.4.4
 
 * Upgraded to work with ggplot2 3.3.0.
