@@ -19,6 +19,7 @@
 #' @export
 #' @rdname dot
 #' @examples
+#' \dontrun{
 #' 
 #' .data <- .dot('data')
 #' .data('input.txt')
@@ -27,6 +28,7 @@
 #' .dot2(c('rawdata','results'))
 #' .rawdata('rawfile.csv')
 #' .results('myresults.txt')
+#' }
 .dot <- function(x, root=getwd(), mustExist=FALSE, relative=FALSE, create=TRUE) {
   .rel <- relative
   f <- function(..., relative=.rel) {

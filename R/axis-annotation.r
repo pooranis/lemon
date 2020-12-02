@@ -69,7 +69,23 @@ annotate_y_axis <- function(label, y,
 }
 #' @rdname annotate_axis
 #' @export
-#' @inheritParams annotate_y_axis
+# @inheritParams annotate_y_axis
+#' @param label Text to print
+#' @param y,x Position of the annotation.
+#' @param side left or right, or top or bottom side to print annotation
+#' @param parsed Logical (default \code{FALSE}), 
+#'   when \code{TRUE}, uses mathplot for outputting expressions. 
+#'   See section "Showing values".
+#' @param print_label,print_value,print_both
+#'   Logical; what to show on annotation. Label and/or value.
+#'   \code{print_both} is shortcut for setting both \code{print_label} and
+#'   \code{print_value}. When both is TRUE, uses argument \code{sep} to 
+#'   separate the label and value.
+#' @param ... Style settings for label and tick: 
+#'   colour, hjust, vjust, size, fontface, family, rot. 
+#'   When \code{waiver()} (default),
+#'   the relevant theme element is used.
+
 annotate_x_axis <- function(label, x, 
                              side = waiver(), 
                              print_label = TRUE,
@@ -288,9 +304,9 @@ AAList <- ggplot2::ggproto("AAList", NULL,
       
       params$tickcolour <- ifelse(params$tick, params$colour, NA)
       
-      axisgrob <- guide_axis(scales::rescale(params$values, from=range), labels, side, theme, default, params)
+      axisgrob <- old_guide_axis(scales::rescale(params$values, from=range), labels, side, theme)
     } else {
-      axisgrob <- guide_axis(NA, NA, side, theme, element_blank(), data.frame(tickcolour=NA))
+      axisgrob <- old_guide_axis(NA, NA, side, theme)
     }
     
     gt_index <- which(axisgrob$childrenOrder == 'axis')
@@ -318,9 +334,9 @@ AAList <- ggplot2::ggproto("AAList", NULL,
           stringsAsFactors = FALSE
         )
         
-        next_grobs <- guide_axis(
+        next_grobs <- old_guide_axis(
           scales::rescale(a$get_param('value'), from=range), 
-          a$label(), side, theme, default, gp_df)
+          a$label(), side, theme)
         
         axisgrob$children[[gt_index]] <- gtable_add_grob(
           x = axisgrob$children[[gt_index]],
@@ -378,3 +394,121 @@ AAList <- ggplot2::ggproto("AAList", NULL,
   }
 
 )
+
+# ggplot2 v. 2.2.1 guide_axis
+# Grob for axes
+#
+# @param position of ticks
+# @param labels at ticks
+# @param position of axis (top, bottom, left or right)
+# @param range of data values
+old_guide_axis <- function(at, labels, position = "right", theme) {
+  if (length(at) == 0)
+    return(zeroGrob())
+
+  at <- unit(at, "native")
+  position <- match.arg(position, c("top", "bottom", "right", "left"))
+
+  zero <- unit(0, "npc")
+  one <- unit(1, "npc")
+
+  label_render <- switch(position,
+    top = "axis.text.x.top", bottom = "axis.text.x",
+    left = "axis.text.y", right = "axis.text.y.right"
+  )
+
+  label_x <- switch(position,
+    top = ,
+    bottom = at,
+    right = theme$axis.ticks.length,
+    left = one - theme$axis.ticks.length
+  )
+  label_y <- switch(position,
+    top = theme$axis.ticks.length,
+    bottom = one - theme$axis.ticks.length,
+    right = ,
+    left = at
+  )
+
+  if (is.list(labels)) {
+    if (any(sapply(labels, is.language))) {
+      labels <- do.call(expression, labels)
+    } else {
+      labels <- unlist(labels)
+    }
+  }
+
+  labels <- switch(position,
+    top = ,
+    bottom = element_render(theme, label_render, labels, x = label_x),#, expand_y = TRUE),
+    right = ,
+    left =  element_render(theme, label_render, labels, y = label_y)#, expand_x = TRUE))
+  )
+
+  line <- switch(position,
+    top =    element_render(theme, "axis.line.x", c(0, 1), c(0, 0), id.lengths = 2),
+    bottom = element_render(theme, "axis.line.x", c(0, 1), c(1, 1), id.lengths = 2),
+    right =  element_render(theme, "axis.line.y", c(0, 0), c(0, 1), id.lengths = 2),
+    left =   element_render(theme, "axis.line.y", c(1, 1), c(0, 1), id.lengths = 2)
+  )
+
+  nticks <- length(at)
+
+  ticks <- switch(position,
+    top = element_render(theme, "axis.ticks.x",
+      x          = rep(at, each = 2),
+      y          = rep(unit.c(zero, theme$axis.ticks.length), nticks),
+      id.lengths = rep(2, nticks)),
+    bottom = element_render(theme, "axis.ticks.x",
+      x          = rep(at, each = 2),
+      y          = rep(unit.c(one - theme$axis.ticks.length, one), nticks),
+      id.lengths = rep(2, nticks)),
+    right = element_render(theme, "axis.ticks.y",
+      x          = rep(unit.c(zero, theme$axis.ticks.length), nticks),
+      y          = rep(at, each = 2),
+      id.lengths = rep(2, nticks)),
+    left = element_render(theme, "axis.ticks.y",
+      x          = rep(unit.c(one - theme$axis.ticks.length, one), nticks),
+      y          = rep(at, each = 2),
+      id.lengths = rep(2, nticks))
+  )
+
+  # Create the gtable for the ticks + labels
+  gt <- switch(position,
+    top    = gtable_col("axis",
+      grobs   = list(labels, ticks),
+      width   = one,
+      heights = unit.c(grobHeight(labels), theme$axis.ticks.length)
+    ),
+    bottom = gtable_col("axis",
+      grobs   = list(ticks, labels),
+      width   = one,
+      heights = unit.c(theme$axis.ticks.length, grobHeight(labels))
+    ),
+    right  = gtable_row("axis",
+      grobs   = list(ticks, labels),
+      widths  = unit.c(theme$axis.ticks.length, grobWidth(labels)),
+      height  = one
+    ),
+    left   = gtable_row("axis",
+      grobs   = list(labels, ticks),
+      widths  = unit.c(grobWidth(labels), theme$axis.ticks.length),
+      height  = one
+    )
+  )
+
+  # Viewport for justifying the axis grob
+  justvp <- switch(position,
+    top    = viewport(y = 0, just = "bottom", height = gtable_height(gt)),
+    bottom = viewport(y = 1, just = "top",    height = gtable_height(gt)),
+    right  = viewport(x = 0, just = "left",   width  = gtable_width(gt)),
+    left   = viewport(x = 1, just = "right",  width  = gtable_width(gt))
+  )
+
+  absoluteGrob(
+    gList(line, gt),
+    width = gtable_width(gt),
+    height = gtable_height(gt),
+    vp = justvp
+  )
+}

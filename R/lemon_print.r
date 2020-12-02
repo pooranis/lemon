@@ -73,7 +73,10 @@ lemon_print <- function(x, options, ...) {
   UseMethod('lemon_print', x)
 }
 
-#' @inheritParams lemon_print
+# @inheritParams lemon_print
+#' @param x an data frame or dplyr table object to be printed
+#' @param options Current chunk options are passed through this argument.
+#' @param ... Ignored for now.
 #' @export
 #' @rdname lemon_print
 lemon_print.data.frame = function(x, options, ...) {
@@ -87,7 +90,10 @@ lemon_print.data.frame = function(x, options, ...) {
   asis_output(res)
 }
 
-#' @inheritParams lemon_print
+# @inheritParams lemon_print
+#' @param x an data frame or dplyr table object to be printed
+#' @param options Current chunk options are passed through this argument.
+#' @param ... Ignored for now.
 #' @export
 #' @rdname lemon_print
 lemon_print.table <- function(x, options, ...) {

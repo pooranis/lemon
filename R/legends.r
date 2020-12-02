@@ -291,7 +291,10 @@ arrangeGrob <- gridExtra::arrangeGrob
 #' @param offset Numeric vector, sets distance from edge of panel.
 #'               First element for horisontal distance, second for vertical.
 #'               Not used by arguments \code{x} and \code{y}.
-#' @param name,clip,z Parameters forwarded to 
+#' @param z Z-level of legend. When \code{Inf} (default), legend is placed just
+#'            \emph{under} the axis-lines. If you want it on top of everything, use a 
+#'            sufficient large number, but not \code{Inf}.
+#' @param name,clip Parameters forwarded to 
 #'             \code{\link[gtable]{gtable_add_grob}}.
 #' @param plot Logical, when \code{TRUE} (default), draws plot with legend
 #'             repositioned on a new page.
@@ -316,8 +319,13 @@ arrangeGrob <- gridExtra::arrangeGrob
 #' # Use odd specifications, here offset the legend with half its height from the bottom.
 #' reposition_legend(d + theme(legend.position='bottom'), x=0.3, y=0, just=c(0, -0.5))
 #'
-#' # For using with facets:
-#' reposition_legend(d + facet_grid(.~cut), 'top left', panel = 'panel-3-1')
+#' # For using with facets, use gtable_show_names to find the panel's name:
+#' \donttest{
+#' gtable_show_names(d + facet_grid(.~cut)) 
+#' panel_name <- ifelse(packageVersion("ggplot2") >= 
+#'    package_version("3.3.1"), 'panel-1-5', 'panel-3-1')
+#' reposition_legend(d + facet_grid(.~cut), 'top left', panel = panel_name)
+#' }
 reposition_legend <- function(aplot,
                              position=NULL,
                              legend=NULL,

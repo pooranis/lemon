@@ -173,10 +173,16 @@ d2 <- d + facet_grid(.~cut)
 gtable_show_names(d2)
 ```
 
-So to place the legend in a specific panel, give its name:
+So to place the legend in a specific panel, specify it's name in the `panel` argument.
+
 
 ```{r reposition_legend_facet1,fig.cap='Placing the legend in a facet panel.'}
-reposition_legend(d2, 'top left', panel = 'panel-3-1')
+g <- ggplotGrob(d2)
+panels <- grepl('panel',g$layout$name)
+right.most <- max(g$layout$r[panels])
+one.of.them <- with(g$layout, which(panels & r == right.most)[1])
+panel_name <- g$layout$name[one.of.them]
+reposition_legend(d2, 'top left', panel = panel_name)
 ```
 
 Likewise for `facet_wrap`. Incidentally, empty panels are also named here:

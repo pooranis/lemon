@@ -5,8 +5,7 @@
 \alias{.dot2}
 \title{Create paths that are safe from changing working directory.}
 \usage{
-.dot(x, root = getwd(), mustExist = FALSE, relative = FALSE,
-  create = TRUE)
+.dot(x, root = getwd(), mustExist = FALSE, relative = FALSE, create = TRUE)
 
 .dot2(names, quiet = FALSE, ...)
 }
@@ -42,6 +41,7 @@ The \code{.dot} functions creates functions that allows relative-like
 specification of paths, but are safe from changing working directory.
 }
 \examples{
+\dontrun{
 
 .data <- .dot('data')
 .data('input.txt')
@@ -50,4 +50,5 @@ specification of paths, but are safe from changing working directory.
 .dot2(c('rawdata','results'))
 .rawdata('rawfile.csv')
 .results('myresults.txt')
+}
 }

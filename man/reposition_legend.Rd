@@ -4,10 +4,20 @@
 \alias{reposition_legend}
 \title{Reposition a legend onto a panel}
 \usage{
-reposition_legend(aplot, position = NULL, legend = NULL,
-  panel = "panel", x = NULL, y = NULL, just = NULL,
-  name = "guide-box", clip = "on", offset = c(0, 0), z = Inf,
-  plot = TRUE)
+reposition_legend(
+  aplot,
+  position = NULL,
+  legend = NULL,
+  panel = "panel",
+  x = NULL,
+  y = NULL,
+  just = NULL,
+  name = "guide-box",
+  clip = "on",
+  offset = c(0, 0),
+  z = Inf,
+  plot = TRUE
+)
 }
 \arguments{
 \item{aplot}{a ggplot2 or gtable object.}
@@ -28,12 +38,16 @@ this is a ggplot2 object.}
 \item{just}{'Anchor point' of legend; it is this point of the legend that is
 placed at the \code{x} and \code{y} coordinates.}
 
-\item{name, clip, z}{Parameters forwarded to 
+\item{name, clip}{Parameters forwarded to 
 \code{\link[gtable]{gtable_add_grob}}.}
 
 \item{offset}{Numeric vector, sets distance from edge of panel.
 First element for horisontal distance, second for vertical.
 Not used by arguments \code{x} and \code{y}.}
+
+\item{z}{Z-level of legend. When \code{Inf} (default), legend is placed just
+\emph{under} the axis-lines. If you want it on top of everything, use a 
+sufficient large number, but not \code{Inf}.}
 
 \item{plot}{Logical, when \code{TRUE} (default), draws plot with legend
 repositioned on a new page.}
@@ -90,8 +104,13 @@ reposition_legend(d + theme(legend.position='bottom'), 'top left')
 # Use odd specifications, here offset the legend with half its height from the bottom.
 reposition_legend(d + theme(legend.position='bottom'), x=0.3, y=0, just=c(0, -0.5))
 
-# For using with facets:
-reposition_legend(d + facet_grid(.~cut), 'top left', panel = 'panel-3-1')
+# For using with facets, use gtable_show_names to find the panel's name:
+\donttest{
+gtable_show_names(d + facet_grid(.~cut)) 
+panel_name <- ifelse(packageVersion("ggplot2") >= 
+   package_version("3.3.1"), 'panel-1-5', 'panel-3-1')
+reposition_legend(d + facet_grid(.~cut), 'top left', panel = panel_name)
+}
 }
 \seealso{
 \code{\link{g_legend}}, \code{\link{grid_arrange_shared_legend}}

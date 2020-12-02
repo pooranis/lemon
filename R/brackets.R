@@ -59,14 +59,17 @@ brackets_horizontal <- function(direction = c('up','down'),
   direction=match.arg(direction)
 
   # Returns a function
-  fn <- function(scale_details, axis, scale, position, theme) {
-    agrob <- render_axis(scale_details, axis, "x", position, theme)
+  
+  #fn <- function(scale_details, axis, scale, position, theme) {
+  fn <- function(guides, position, theme) {
+    agrob <-  panel_guides_grob(guides, position, theme)
+    
     if (agrob$name == 'NULL') return(agrob)
 
     ind <- names(agrob$children) == 'axis'
     ind.notline <-  which(ind)
-    ind.ticks <- which(grepl('ticks', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
-    ind.text <- which(grepl('text', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.ticks <- which(grepl('polyline', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.text <- which(grepl('titleGrob', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
     ticksgrob <- agrob$children[[ind.notline]]$grobs[[ind.ticks]]
     
     # If theme(axis.ticks[.x/.y] = element_blank()), then ticksgrob is a
@@ -123,12 +126,18 @@ brackets_horizontal <- function(direction = c('up','down'),
 ## Turns out, there is no British spelling horizontal with an s...
 #' @export
 #' @keywords internal
-#' @inheritParams brackets_horizontal
+# @inheritParams brackets_horizontal
 brackets_horisontal <- brackets_horizontal
+
 
 #' @export
 #' @rdname brackets
-#' @inheritParams brackets_horizontal
+# @inheritParams brackets_horizontal
+#' @param direction Which way should the opening side of the brackets point?
+#'   up, down, left, or right?
+#' @param length Length of the unit, parallel with axis line.
+#' @param tick.length Height (width) of x-axis (y-axis) bracket.
+#'   If \code{waiver()} (default), use \code{axis.ticks.length} from \code{\link{theme}}.
 brackets_vertical <- function(direction = c('left','right'),
                               length = unit(0.05, 'npc'),
                               tick.length = waiver()) {
@@ -140,14 +149,14 @@ brackets_vertical <- function(direction = c('left','right'),
     tick.length <- unit(as.numeric(tick.length), 'npc')
   
   direction=match.arg(direction)
-  fn <- function(scale_details, axis, scale, position, theme) {
-    agrob <- render_axis(scale_details, axis, "y", position, theme)
+  fn <- function(guides, position, theme) {
+    agrob <-  panel_guides_grob(guides, position, theme)
     if (agrob$name == 'NULL') return(agrob)
 
     ind <- names(agrob$children) == 'axis'
     ind.notline <-  which(ind)
-    ind.ticks <- which(grepl('ticks', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
-    ind.text <- which(grepl('text', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.ticks <- which(grepl('polyline', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
+    ind.text <- which(grepl('titleGrob', sapply(agrob$children[[ind.notline]]$grobs, `[[`, i = 'name')))
     ticksgrob <- agrob$children[[ind.notline]]$grobs[[ind.ticks]]
 
     

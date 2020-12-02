@@ -66,8 +66,10 @@ remove_labels_from_axis <- function(axisgrob) {
   d <- grepl('titleGrob', sapply(axisgrob$children[[a]]$grobs, `[[`, i='name'))
   if (sum(d) > 0) {
     axisgrob$children[[a]] <- do.call(gList, axisgrob$children[[a]]$grobs[!d])
-    if (length(axisgrob$width$arg1) == 2) axisgrob$width$arg1 <- axisgrob$width$arg1[attr(axisgrob$width$arg1, 'unit') != 'grobwidth']
-    if (length(axisgrob$height$arg1) == 2) axisgrob$height$arg1 <- axisgrob$height$arg1[attr(axisgrob$height$arg1, 'unit') != 'grobheight']
+    if (!inherits(axisgrob$width, 'simpleUnit') && length(axisgrob$width$arg1) == 2) 
+      axisgrob$width$arg1 <- axisgrob$width$arg1[attr(axisgrob$width$arg1, 'unit') != 'grobwidth']
+    if (!inherits(axisgrob$height, 'simpleUnit') && length(axisgrob$height$arg1) == 2) 
+      axisgrob$height$arg1 <- axisgrob$height$arg1[attr(axisgrob$height$arg1, 'unit') != 'grobheight']
     #if (length(axisgrob$children[[a]]$heights) == 2) axisgrob$children[[a]]$heights <- axisgrob$children[[a]]$heights[!d]
   }
   axisgrob

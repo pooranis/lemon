@@ -7,7 +7,7 @@ l
 
 (l + annotate_x_axis('| good economy ->', x=25, print_value=FALSE, hjust=0, tick=TRUE))
 
-l + annotate_y_axis("x^2 == .(y)", y=150, parsed=FALSE,  tick=FALSE) +
+l + annotate_y_axis("x^2 == .(y)", y=180, parsed=FALSE,  tick=FALSE) +
     annotate_y_axis("x^2 + bar(x) == .(y)", y=mean(mtcars$hp), parsed=TRUE, tick=TRUE)
 
 l + annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FALSE) 
@@ -16,8 +16,9 @@ l + annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FA
 l + annotate_y_axis('this is midway', y=sum(range(mtcars$hp))/2, print_value = FALSE, side='left')
 
 # work around if an axis only contains parsed expressions
-p + annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FALSE) +
-  annotate_y_axis("some long string", y=100, tick=FALSE, print_value=FALSE, colour=NA)
+p + annotate_y_axis("some long string", y=100, tick=FALSE, print_value=FALSE, colour=NA) +
+  annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FALSE)
+  
 
 
 # Works together with other functions

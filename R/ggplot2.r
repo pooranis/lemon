@@ -43,18 +43,6 @@ is.waive <- function(x) inherits(x, "waiver")
   if (!is.null(a)) a else b
 }
 
-# From ggplot2/R/coord-.r
-render_axis <- function(panel_params, axis, scale, position, theme) {
-  if (axis == "primary") {
-    guide_axis(panel_params[[paste0(scale, ".major")]], panel_params[[paste0(scale, ".labels")]], position, theme)
-  } else if (axis == "secondary" && !is.null(panel_params[[paste0(scale, ".sec.major")]])) {
-    guide_axis(panel_params[[paste0(scale, ".sec.major")]], panel_params[[paste0(scale, ".sec.labels")]], position, theme)
-  } else {
-    zeroGrob()
-  }
-}
-
-
 #' @import grid
 ggname <- function (prefix, grob) {
   grob$name <- grid::grobName(grob, prefix)
@@ -111,3 +99,16 @@ plot_theme <- function (x, default = theme_get()) {
   }
 }
 is_theme_complete <- function(x) isTRUE(attr(x, "complete"))
+
+# From ggplot2/R/scale-.r
+# In place modification of a scale to change the primary axis
+scale_flip_position <- function(scale) {
+  scale$position <- switch(scale$position,
+    top = "bottom",
+    bottom = "top",
+    left = "right",
+    right = "left",
+    scale$position
+  )
+  invisible()
+}

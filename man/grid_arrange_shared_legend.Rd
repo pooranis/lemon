@@ -4,8 +4,13 @@
 \alias{grid_arrange_shared_legend}
 \title{Share a legend between multiple plots}
 \usage{
-grid_arrange_shared_legend(..., ncol = length(list(...)), nrow = 1,
-  position = c("bottom", "right", "top", "left"), plot = TRUE)
+grid_arrange_shared_legend(
+  ...,
+  ncol = length(list(...)),
+  nrow = 1,
+  position = c("bottom", "right", "top", "left"),
+  plot = TRUE
+)
 }
 \arguments{
 \item{...}{Objects to plot. First argument should be a ggplot2 object, 

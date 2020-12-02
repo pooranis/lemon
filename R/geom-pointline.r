@@ -51,7 +51,7 @@ NULL
 #'   (\emph{this} is where the function excels over \code{geom_point() + geom_line()}).
 #' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}.
 #' @param lineend Line end style (round, butt, square).
-#' @param linejoin Line join style (round, mintre, bevel).
+#' @param linejoin Line join style (round, mitre, bevel).
 #' @param linemitre Line mitre limit (number greater than 1).
 #' @param arrow Arrow specification, as created by \code{\link[grid]{arrow}}.
 #' @param na.rm If \code{FALSE} (default), missing values are removed with a warning.
@@ -213,6 +213,8 @@ GeomPointPath <- ggplot2::ggproto('GeomPointPath',
       deltay = y1 - y;
       length <- sqrt(deltax**2 + deltay**2);
     })
+    munched <- munched[-nrow(munched),]
+    
     
     if (any(munched$length > threshold, na.rm=TRUE)) {
       # Calculate angle between each pair of points and move endpoints:
@@ -294,7 +296,42 @@ GeomPointPath <- ggplot2::ggproto('GeomPointPath',
 
 
 #' @export
-#' @inheritParams geom_pointpath
+# @inheritParams geom_pointpath
+#' @param mapping Set of aesthetic mappings created by \code{\link[ggplot2]{aes}}
+#'   or \code{\link[ggplot2]{aes_}}.
+#' @param data The data to be displayed in this layer.
+#' @param stat The statistical transformation to use on the data for this layer, 
+#'   as a string.
+#' @param position Position adjustment, either as a string, or the result of a 
+#'   call to a position adjustment function
+#'   (e.g. \code{\link[ggplot2]{position_jitter}}).
+#'   Both lines and points gets the same adjustment 
+#'   (\emph{this} is where the function excels over \code{geom_point() + geom_line()}).
+#' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}.
+#' @param lineend Line end style (round, butt, square).
+#' @param linejoin Line join style (round, mitre, bevel).
+#' @param linemitre Line mitre limit (number greater than 1).
+#' @param arrow Arrow specification, as created by \code{\link[grid]{arrow}}.
+#' @param na.rm If \code{FALSE} (default), missing values are removed with a warning.
+#'   If \code{TRUE}, missing values are silently removed.
+#' @param show.legend Logical. Should this layer be included in the legends?
+#'   \code{NA} (default), includes if any aesthetics are mapped.
+#'   \code{FALSE} never includes, and \code{TRUE} always includes.
+#' @param inherit.aes If \code{FALSE}, overrides the default aesthetic, rather
+#'   than combining with them. This is most useful for helper functions that
+#'   define both data and aesthetics and shouldn't inherit behaviour from the 
+#'   default plot specification.
+#' @param linesize Width of of line.
+#' @param distance Gap size between point and end of lines;
+#'   use \code{\link[grid]{unit}}. Is converted to 'pt' if given as simple numeric.
+#'   When \code{NULL} or \code{NA}, gapping and \code{shorten}/\code{treshold}
+#'   is disabled. To keep the latter, set to 0.
+#' @param shorten,threshold When points are closer than \code{threshold},
+#'   shorten the line by the proportion in \code{shorten} instead of adding
+#'   a gap by \code{distance}.
+#' @param linecolour,linecolor When not \code{waiver()}, the line is drawn with 
+#'   this colour instead of that set by aesthetic \code{colour}.
+
 #' @rdname geom_pointpath
 geom_pointline <- function(mapping = NULL, data = NULL, stat = "identity",
                            position = "identity", na.rm = FALSE,
@@ -353,7 +390,41 @@ GeomPointLine <- ggproto("GeomPointLine", GeomPointPath,
 
 
 
-#' @inheritParams geom_pointpath
+# @inheritParams geom_pointpath
+#' @param mapping Set of aesthetic mappings created by \code{\link[ggplot2]{aes}}
+#'   or \code{\link[ggplot2]{aes_}}.
+#' @param data The data to be displayed in this layer.
+#' @param stat The statistical transformation to use on the data for this layer, 
+#'   as a string.
+#' @param position Position adjustment, either as a string, or the result of a 
+#'   call to a position adjustment function
+#'   (e.g. \code{\link[ggplot2]{position_jitter}}).
+#'   Both lines and points gets the same adjustment 
+#'   (\emph{this} is where the function excels over \code{geom_point() + geom_line()}).
+#' @param ... other arguments passed on to \code{\link[ggplot2]{layer}}.
+#' @param lineend Line end style (round, butt, square).
+#' @param linejoin Line join style (round, mitre, bevel).
+#' @param linemitre Line mitre limit (number greater than 1).
+#' @param arrow Arrow specification, as created by \code{\link[grid]{arrow}}.
+#' @param na.rm If \code{FALSE} (default), missing values are removed with a warning.
+#'   If \code{TRUE}, missing values are silently removed.
+#' @param show.legend Logical. Should this layer be included in the legends?
+#'   \code{NA} (default), includes if any aesthetics are mapped.
+#'   \code{FALSE} never includes, and \code{TRUE} always includes.
+#' @param inherit.aes If \code{FALSE}, overrides the default aesthetic, rather
+#'   than combining with them. This is most useful for helper functions that
+#'   define both data and aesthetics and shouldn't inherit behaviour from the 
+#'   default plot specification.
+#' @param linesize Width of of line.
+#' @param distance Gap size between point and end of lines;
+#'   use \code{\link[grid]{unit}}. Is converted to 'pt' if given as simple numeric.
+#'   When \code{NULL} or \code{NA}, gapping and \code{shorten}/\code{treshold}
+#'   is disabled. To keep the latter, set to 0.
+#' @param shorten,threshold When points are closer than \code{threshold},
+#'   shorten the line by the proportion in \code{shorten} instead of adding
+#'   a gap by \code{distance}.
+#' @param linecolour,linecolor When not \code{waiver()}, the line is drawn with 
+#'   this colour instead of that set by aesthetic \code{colour}.
 #' @rdname geom_pointpath
 geom_pointrangeline <- function(mapping = NULL, data = NULL, stat = "identity",
                                 position = "identity", na.rm = FALSE,

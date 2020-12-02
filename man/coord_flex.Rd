@@ -6,17 +6,36 @@
 \alias{coord_flex_fixed}
 \title{Cartesian coordinates with flexible options for drawing axes}
 \usage{
-coord_flex_cart(xlim = NULL, ylim = NULL, expand = TRUE,
-  top = waiver(), left = waiver(), bottom = waiver(),
-  right = waiver())
+coord_flex_cart(
+  xlim = NULL,
+  ylim = NULL,
+  expand = TRUE,
+  top = waiver(),
+  left = waiver(),
+  bottom = waiver(),
+  right = waiver()
+)
 
-coord_flex_flip(xlim = NULL, ylim = NULL, expand = TRUE,
-  top = waiver(), left = waiver(), bottom = waiver(),
-  right = waiver())
+coord_flex_flip(
+  xlim = NULL,
+  ylim = NULL,
+  expand = TRUE,
+  top = waiver(),
+  left = waiver(),
+  bottom = waiver(),
+  right = waiver()
+)
 
-coord_flex_fixed(ratio = 1, xlim = NULL, ylim = NULL,
-  expand = TRUE, top = waiver(), left = waiver(),
-  bottom = waiver(), right = waiver())
+coord_flex_fixed(
+  ratio = 1,
+  xlim = NULL,
+  ylim = NULL,
+  expand = TRUE,
+  top = waiver(),
+  left = waiver(),
+  bottom = waiver(),
+  right = waiver()
+)
 }
 \arguments{
 \item{xlim, ylim}{Limits for the x and y axes.}
@@ -44,8 +63,7 @@ To ensure the modified axis lines are visible, use
 \section{User defined functions}{
 
 The provided function in \code{top}, \code{right}, \code{bottom}, and \code{left}
-defaults to \code{render_axis} which is defined in \file{ggplot2/R/coord-.r}, which in
-turns calls \code{guide_axis} (see \file{ggplot2/R/guides-axis.r}).
+defaults to \code{panel_guides_grob} which is defined in \file{gR/coord-cartesian.r}.
 
 The provided function is with the arguments
 \code{scale_details}, \code{axis}, \code{scale}, \code{position}, and \code{theme},

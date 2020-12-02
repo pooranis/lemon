@@ -6,25 +6,66 @@
 \alias{geom_pointrangeline}
 \title{Connected points}
 \usage{
-geom_pointpath(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, distance = unit(3, "pt"), shorten = 0.5,
-  threshold = 0.1, lineend = "butt", linejoin = "round",
-  linemitre = 1, linesize = 0.5, linecolour = waiver(),
-  linecolor = waiver(), arrow = NULL, ...)
+geom_pointpath(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  distance = unit(3, "pt"),
+  shorten = 0.5,
+  threshold = 0.1,
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 1,
+  linesize = 0.5,
+  linecolour = waiver(),
+  linecolor = waiver(),
+  arrow = NULL,
+  ...
+)
 
-geom_pointline(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, distance = unit(3, "pt"), shorten = 0.5,
-  threshold = 0.1, lineend = "butt", linejoin = "round",
-  linemitre = 1, linesize = 0.5, linecolour = waiver(),
-  linecolor = waiver(), arrow = NULL, ...)
+geom_pointline(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  distance = unit(3, "pt"),
+  shorten = 0.5,
+  threshold = 0.1,
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 1,
+  linesize = 0.5,
+  linecolour = waiver(),
+  linecolor = waiver(),
+  arrow = NULL,
+  ...
+)
 
-geom_pointrangeline(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, distance = unit(3, "pt"), lineend = "butt",
-  linejoin = "round", linemitre = 1, linesize = 0.5,
-  linecolour = waiver(), linecolor = waiver(), arrow = NULL, ...)
+geom_pointrangeline(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  distance = unit(3, "pt"),
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 1,
+  linesize = 0.5,
+  linecolour = waiver(),
+  linecolor = waiver(),
+  arrow = NULL,
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2]{aes}}
@@ -64,7 +105,7 @@ a gap by \code{distance}.}
 
 \item{lineend}{Line end style (round, butt, square).}
 
-\item{linejoin}{Line join style (round, mintre, bevel).}
+\item{linejoin}{Line join style (round, mitre, bevel).}
 
 \item{linemitre}{Line mitre limit (number greater than 1).}
 

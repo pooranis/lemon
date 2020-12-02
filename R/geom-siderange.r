@@ -109,8 +109,7 @@ GeomSideRange <- ggplot2::ggproto('GeomSideRange',
                         lineend = "butt", sides='bl', na.rm = FALSE) {
 
     data <- coord$transform(data, panel_params)
-    save(data, coord, file='tmp.Rdata')
-
+    
     default_point = list(pch = 19, sizer = 3, alpha = NA, stroke = 0.5, fill = NA)
     if (!is.list(start) && !is.na(start)) {
       start <- merge.list(list(pch=start), default_point)
@@ -278,8 +277,7 @@ GeomSideRange <- ggplot2::ggproto('GeomSideRange',
         sideranges$y_r <- grid::gTree(children=do.call(grid::gList, sideranges$y_r))
       }
     }
-    save(data, coord, sideranges, file='tmp.Rdata')
-    
+
     grid::gTree(children = do.call(grid::gList, sideranges))
   },
   

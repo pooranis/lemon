@@ -5,11 +5,27 @@
 \alias{annotate_x_axis}
 \title{Annotations in the axis}
 \usage{
-annotate_y_axis(label, y, side = waiver(), print_label = TRUE,
-  print_value = TRUE, print_both = TRUE, parsed = FALSE, ...)
+annotate_y_axis(
+  label,
+  y,
+  side = waiver(),
+  print_label = TRUE,
+  print_value = TRUE,
+  print_both = TRUE,
+  parsed = FALSE,
+  ...
+)
 
-annotate_x_axis(label, x, side = waiver(), print_label = TRUE,
-  print_value = TRUE, print_both = TRUE, parsed = FALSE, ...)
+annotate_x_axis(
+  label,
+  x,
+  side = waiver(),
+  print_label = TRUE,
+  print_value = TRUE,
+  print_both = TRUE,
+  parsed = FALSE,
+  ...
+)
 }
 \arguments{
 \item{label}{Text to print}
@@ -53,7 +69,7 @@ l
 
 (l + annotate_x_axis('| good economy ->', x=25, print_value=FALSE, hjust=0, tick=TRUE))
 
-l + annotate_y_axis("x^2 == .(y)", y=150, parsed=FALSE,  tick=FALSE) +
+l + annotate_y_axis("x^2 == .(y)", y=180, parsed=FALSE,  tick=FALSE) +
     annotate_y_axis("x^2 + bar(x) == .(y)", y=mean(mtcars$hp), parsed=TRUE, tick=TRUE)
 
 l + annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FALSE) 
@@ -62,8 +78,9 @@ l + annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FA
 l + annotate_y_axis('this is midway', y=sum(range(mtcars$hp))/2, print_value = FALSE, side='left')
 
 # work around if an axis only contains parsed expressions
-p + annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FALSE) +
-  annotate_y_axis("some long string", y=100, tick=FALSE, print_value=FALSE, colour=NA)
+p + annotate_y_axis("some long string", y=100, tick=FALSE, print_value=FALSE, colour=NA) +
+  annotate_y_axis("bar(x) == .(y)", y = mean(mtcars$hp),  parsed=TRUE, tick=FALSE)
+  
 
 
 # Works together with other functions
@@ -71,6 +88,6 @@ p <- p + theme_light() + theme(panel.border=element_blank(),
                                axis.line = element_line(), 
                                axis.ticks = element_line(colour='black')) 
 p + coord_capped_cart(bottom='right') + 
-  annotate_y_axis('More than I\\ncan afford', y=125, 
+  annotate_y_axis('More than I\ncan afford', y=125, 
                   print_value=FALSE, tick=TRUE)
 }
